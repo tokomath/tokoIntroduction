@@ -8,8 +8,16 @@
 </head>
 <body>
   <header>
-    <h1>tokotoko — リポジトリ紹介</h1>
-    <p>このページは `tokotoko` リポジトリの依存ライブラリ、開発環境、使用技術を日本語でまとめた紹介ページです。</p>
+    <div class="brand">
+      <img src="assets/logo.svg" alt="tokotoko logo" class="logo">
+      <div class="brand-text">
+        <h1>tokotoko — リポジトリ紹介</h1>
+        <p>このページは `tokotoko` リポジトリの依存ライブラリ、開発環境、使用技術を日本語でまとめた紹介ページです。</p>
+      </div>
+    </div>
+    <div class="hero">
+      <img src="assets/hero.svg" alt="hero illustration" />
+    </div>
   </header>
 
   <main>
@@ -58,48 +66,10 @@
         <li>デプロイは通常 Vercel を想定（Next.js と相性が良い）</li>
       </ul>
     </section>
-
-    <section>
-      <h2>ローカルセットアップ（手順）</h2>
-      <p>下のコマンドはリポジトリルートから実行します。</p>
-      <pre><code>git clone https://github.com/tokomath/tokotoko.git
-cd tokotoko
-npm install
-# 環境変数を準備（例: .env）
-# DATABASE_URL に PostgreSQL の接続文字列を設定
-npx prisma generate
-npx prisma migrate dev --name init
-npm run dev
-</code></pre>
-      <p>注: データベースは PostgreSQL を想定しています。ローカルでの簡易検証には Postgres コンテナやローカルインスタンスを使用してください。</p>
-    </section>
-
-    <section>
-      <h2>GitHub Pages で公開する方法</h2>
-      <p>`tokoIntroduction` フォルダにこの紹介ページを作成しました。GitHub Pages で公開する代表的な方法：</p>
-      <ul>
-        <li>リポジトリの Settings → Pages で公開ソースを <strong>Branch: main</strong>、Folder: <strong>/docs</strong> に設定する。<br>その場合は `tokoIntroduction` の中身を `docs/` に移してください。</li>
-        <li>別案: `gh-pages` ブランチを作成してそこに静的ファイルを置き、Pages を有効化する。</li>
-      </ul>
-      <p>簡単なコマンド（`tokoIntroduction` の内容を `docs/` にコピーする例）:</p>
-      <pre><code>cp -r tokoIntroduction/* docs/
-git add docs
-git commit -m "Add introduction site for GitHub Pages"
-git push origin main
-</code></pre>
-    </section>
-
-    <section>
-      <h2>補足・注意点</h2>
-      <ul>
-        <li>Next.js アプリ本体は SSR/動的ルーティングを使っているため、そのまま GitHub Pages（静的ホスティング）で正しく動作しないルートがあります。紹介ページは静的 HTML なので Pages で使えますが、本番アプリは Vercel 等のホスティングを推奨します。</li>
-        <li>認証や DB の設定（Clerk や DATABASE_URL）は安全に管理してください。</li>
-      </ul>
-    </section>
   </main>
 
   <footer>
-    <p>生成: `tokoIntroduction/index.html` — tokotoko リポジトリ紹介</p>
+    <p>生成: `tokoIntroduction/docs/index.html` — tokotoko リポジトリ紹介</p>
   </footer>
 </body>
 </html>
