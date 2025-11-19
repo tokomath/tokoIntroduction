@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>tokotoko リポジトリ紹介</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <h1>tokotoko — リポジトリ紹介</h1>
+    <p>このページは `tokotoko` リポジトリの依存ライブラリ、開発環境、使用技術を日本語でまとめた紹介ページです。</p>
+  </header>
+
+  <main>
+    <section>
+      <h2>概要</h2>
+      <p>`tokotoko` は Next.js（TypeScript） を用いた教育向けアプリケーションのフロントエンド／バックエンド混在リポジトリです。管理者（先生）によるテスト作成、学生による解答提出、採点などの機能を持ちます。</p>
+    </section>
+
+    <section>
+      <h2>主要依存ライブラリ</h2>
+      <ul>
+        <li><strong>Next.js</strong>: サイトのフレームワーク（`next`）</li>
+        <li><strong>React</strong>: UI（`react`, `react-dom`）</li>
+        <li><strong>TypeScript</strong>: 型付け（`typescript`）</li>
+        <li><strong>MUI</strong>: コンポーネントライブラリ（`@mui/material` 等）</li>
+        <li><strong>Prisma</strong>: ORM（`prisma`, `@prisma/client`）</li>
+        <li><strong>Clerk</strong>: 認証（`@clerk/nextjs`）</li>
+        <li><strong>状態管理</strong>: `zustand`</li>
+        <li><strong>数式表示</strong>: `react-katex`, `react-latex-next`, `react-mathquill`</li>
+        <li><strong>ユーティリティ</strong>: `dayjs`, `nerdamer`（数式処理）</li>
+        <li><strong>Webhook</strong>: `svix`（外部通知）</li>
+        <li><strong>テーブル等</strong>: `react-table`, `@mui/x-data-grid`</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>開発環境</h2>
+      <ul>
+        <li><strong>Node.js</strong>: 推奨 Node.js 18 以上</li>
+        <li><strong>パッケージマネージャ</strong>: `npm` または `pnpm`（リポジトリは npm スクリプトを利用）</li>
+        <li><strong>TypeScript</strong>: バージョン 5 系を使用</li>
+        <li><strong>データベース</strong>: Prisma の `datasource` は <code>postgresql</code>（`prisma/schema.prisma` を参照）</li>
+        <li><strong>ORM</strong>: Prisma CLI（`prisma`）を利用してマイグレーション・クライアント生成を行います</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>使用技術（技術スタック）</h2>
+      <ul>
+        <li>Next.js（App Router） + React（Server/Client Components）</li>
+        <li>Prisma（Postgres）による DB 層</li>
+        <li>Clerk による認証連携</li>
+        <li>MUI による UI（テーマ、コンポーネント）</li>
+        <li>数式レンダリング用に KaTeX / MathQuill を組み合わせ</li>
+        <li>状態管理に Zustand（軽量）</li>
+        <li>デプロイは通常 Vercel を想定（Next.js と相性が良い）</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>ローカルセットアップ（手順）</h2>
+      <p>下のコマンドはリポジトリルートから実行します。</p>
+      <pre><code>git clone https://github.com/tokomath/tokotoko.git
+cd tokotoko
+npm install
+# 環境変数を準備（例: .env）
+# DATABASE_URL に PostgreSQL の接続文字列を設定
+npx prisma generate
+npx prisma migrate dev --name init
+npm run dev
+</code></pre>
+      <p>注: データベースは PostgreSQL を想定しています。ローカルでの簡易検証には Postgres コンテナやローカルインスタンスを使用してください。</p>
+    </section>
+
+    <section>
+      <h2>GitHub Pages で公開する方法</h2>
+      <p>`tokoIntroduction` フォルダにこの紹介ページを作成しました。GitHub Pages で公開する代表的な方法：</p>
+      <ul>
+        <li>リポジトリの Settings → Pages で公開ソースを <strong>Branch: main</strong>、Folder: <strong>/docs</strong> に設定する。<br>その場合は `tokoIntroduction` の中身を `docs/` に移してください。</li>
+        <li>別案: `gh-pages` ブランチを作成してそこに静的ファイルを置き、Pages を有効化する。</li>
+      </ul>
+      <p>簡単なコマンド（`tokoIntroduction` の内容を `docs/` にコピーする例）:</p>
+      <pre><code>cp -r tokoIntroduction/* docs/
+git add docs
+git commit -m "Add introduction site for GitHub Pages"
+git push origin main
+</code></pre>
+    </section>
+
+    <section>
+      <h2>補足・注意点</h2>
+      <ul>
+        <li>Next.js アプリ本体は SSR/動的ルーティングを使っているため、そのまま GitHub Pages（静的ホスティング）で正しく動作しないルートがあります。紹介ページは静的 HTML なので Pages で使えますが、本番アプリは Vercel 等のホスティングを推奨します。</li>
+        <li>認証や DB の設定（Clerk や DATABASE_URL）は安全に管理してください。</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <p>生成: `tokoIntroduction/index.html` — tokotoko リポジトリ紹介</p>
+  </footer>
+</body>
+</html>
